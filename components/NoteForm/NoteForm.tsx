@@ -4,12 +4,12 @@ import { Formik, Form, ErrorMessage, type FormikHelpers, Field } from "formik"
 import css from "./NoteForm.module.css"
 import * as Yup from "yup"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { createNote, Tags } from "@/lib/api"
+import { createNote, type Tag } from "@/lib/api"
 import { Loading } from "notiflix"
 import toast from "react-hot-toast"
 
 interface NoteFormProps {
-	categories: Tags
+	categories: Tag []
 	onSubmit: () => void
 	onCancel: () => void
 }
@@ -17,7 +17,7 @@ interface NoteFormProps {
 interface InitialValues {
 	title: string
 	content: string
-	tag: Tags[number]
+	tag: Tag
 }
 
 const initialValues: InitialValues = {
@@ -96,8 +96,8 @@ export default function NoteForm({
 					<label htmlFor="tag">Tag</label>
 					<Field as="select" name="tag" id="tag" className={css.select}>
 						{categories
-							.filter(tag => tag !== "All")
-							.map(tag => (
+							.filter((tag: Tag) => tag !== "All")
+							.map((tag: Tag) => (
 								<option key={tag} value={tag}>
 									{tag}
 								</option>

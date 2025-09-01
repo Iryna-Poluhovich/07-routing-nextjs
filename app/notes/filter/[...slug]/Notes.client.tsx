@@ -5,7 +5,7 @@ import NoteForm from "@/components/NoteForm/NoteForm"
 import NoteList from "@/components/NoteList/NoteList"
 import Pagination from "@/components/Pagination/Pagination"
 import SearchBox from "@/components/SearchBox/SearchBox"
-import { fetchNotes, Tags } from "@/lib/api"
+import { fetchNotes,  type Tag } from "@/lib/api"
 import { keepPreviousData, useQuery } from "@tanstack/react-query"
 import { useState } from "react"
 import { Toaster } from "react-hot-toast"
@@ -13,8 +13,8 @@ import { useDebounce, useDebouncedCallback } from "use-debounce"
 import css from "./Notes.client.module.css"
 
 interface NotesClientProps {
-	categories: Tags
-	category: Exclude<Tags[number], "All"> | undefined
+	categories: Tag[]
+	category: Exclude<Tag, "All"> | undefined
 }
 
 const NotesClient = ({ categories, category }: NotesClientProps) => {
