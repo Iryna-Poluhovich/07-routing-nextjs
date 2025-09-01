@@ -7,7 +7,7 @@ import { fetchNotes, getCategories, type Tag } from "@/lib/api"
 import NotesClient from "./Notes.client"
 
 interface NotesFilterProps {
-  params: { slug: string[] }
+   params: Promise<{ slug: string[] }>
 }
 
 type FilterableTag = Exclude<Tag, "All">
@@ -24,7 +24,7 @@ export default async function NotesFilter({ params }: NotesFilterProps) {
   const queryClient = new QueryClient()
 
   
-  const { slug } = params
+  const { slug } = await params
   const categorySlug = slug[0]
 
 
